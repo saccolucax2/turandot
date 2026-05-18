@@ -9,7 +9,7 @@ import (
 )
 
 func (self *Generator) WriteHeader(entity string) {
-	self.WriteKeyValue(0, "tosca_definitions_version", "tosca_simple_yaml_1_3", false)
+	self.WriteKeyValue(0, "tosca_definitions_version", "tosca_2_0", false)
 
 	self.Writeln()
 	self.Writeln("# This file was automatically generated from data published at:")
@@ -163,7 +163,15 @@ func (self *Generator) WriteField(name string, schema spec.Schema, required bool
 	self.WriteKey(3, name)
 	self.WriteKeyValue(4, "description", description, true)
 	self.WriteKeyValue(4, "type", type_, false)
-	self.WriteKeyValue(4, "entry_schema", entrySchema, false)
+	if entrySchema != "" {
+		if type_ == "list" {
+			self.WriteKeyValue(4, "item_type", entrySchema, false)
+		} else if type_ == "map" {
+			self.WriteKeyValue(4, "value_type", entrySchema, false)
+		} else {
+			self.WriteKeyValue(4, "entry_schema", entrySchema, false)
+		}
+	}
 	self.WriteKeyValue(4, "default", default_, false)
 
 	if !required {
