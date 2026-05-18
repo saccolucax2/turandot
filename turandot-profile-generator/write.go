@@ -163,26 +163,22 @@ func (self *Generator) WriteField(name string, schema spec.Schema, required bool
 	self.WriteKey(3, name)
 	self.WriteKeyValue(4, "description", description, true)
 	self.WriteKeyValue(4, "type", type_, false)
+	
 	if entrySchema != "" {
-		if type_ == "list" {
-			self.WriteKeyValue(4, "item_type", entrySchema, false)
-		} else if type_ == "map" {
-			self.WriteKeyValue(4, "value_type", entrySchema, false)
-		} else {
-			self.WriteKeyValue(4, "entry_schema", entrySchema, false)
-		}
+		self.WriteKeyValue(4, "entry_schema", entrySchema, false)
 	}
-	self.WriteKeyValue(4, "default", default_, false)
 
+	self.WriteKeyValue(4, "default", default_, false)
 	if !required {
 		// The TOSCA default is required=true
 		self.WriteKeyValue(4, "required", "false", false)
 	}
-
+	/*
 	if (override != nil) && (len(override.Constraints) > 0) {
 		self.WriteKey(4, "constraints")
 		for _, constraint := range override.Constraints {
 			self.Writeln(indentation(5), "- ", constraint)
 		}
 	}
+	*/
 }

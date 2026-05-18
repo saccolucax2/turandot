@@ -68,10 +68,12 @@ add:
         description: >-
           More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors"
         type: LabelSelector
+        required: false
       template:
         description: >-
           More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
         type: PodTemplateSpec
+        required: false
 
 override:
 
@@ -157,8 +159,6 @@ override:
 
   DeploymentSpec:
     derived_from: PodTemplateOwner
-    fields:
-      selector: { required: false }
 
   DownwardAPIVolumeSource:
     fields:

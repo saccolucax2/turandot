@@ -1,4 +1,4 @@
-tosca_definitions_version: tosca_simple_yaml_1_3
+tosca_definitions_version: tosca_2_0
 
 # This file was automatically generated from data published at:
 # https://raw.githubusercontent.com/kubernetes/kubernetes/v1.24.1/api/openapi-spec/swagger.json
@@ -266,8 +266,6 @@ data_types:
           versions: v10, v2, v1, v11beta2, v10beta3, v3beta1, v12alpha1, v11alpha2, foo1,
           foo10.
         type: integer
-        constraints:
-          - greater_than: 0
 
   APIServiceStatus:
     metadata:
@@ -588,8 +586,6 @@ data_types:
           (only in managed availability set). defaults to shared
         type: string
         required: false
-        constraints:
-          - valid_values: [ Shared, Dedicated, Managed ]
       readOnly:
         description: >-
           readOnly Defaults to false (read/write). ReadOnly here will force the ReadOnly
@@ -1911,8 +1907,6 @@ data_types:
           Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
         type: string
         required: false
-        constraints:
-          - valid_values: [ UDP, TCP, SCTP ]
 
   ContainerResourceMetricSource:
     metadata:
@@ -2130,8 +2124,6 @@ data_types:
           "Replace": cancels currently running job and replaces it with a new one
         type: string
         required: false
-        constraints:
-          - valid_values: [ Allow, Forbid, Replace ]
       failedJobsHistoryLimit:
         description: >-
           The number of failed finished jobs to retain. Value must be non-negative
@@ -2282,8 +2274,6 @@ data_types:
            is needed for this option. This requires spec.preserveUnknownFields to be
           false, and spec.conversion.webhook to be set.
         type: string
-        constraints:
-          - valid_values: [ None, Webhook ]
       webhook:
         description: >-
           webhook describes how to call the conversion webhook. Required when `strategy`
@@ -2414,8 +2404,6 @@ data_types:
           scope indicates whether the defined custom resource is cluster- or
           namespace-scoped. Allowed values are `Cluster` and `Namespaced`.
         type: string
-        constraints:
-          - valid_values: [ Cluster, Namespaced ]
       versions:
         description: >-
           versions is the list of all API versions of the defined custom resource. Version
@@ -2497,8 +2485,9 @@ data_types:
         required: false
       name:
         description: >-
-          name is the version name, e.g. “v1”, “v2beta1”, etc. The custom resources are
-          served under this version at `/apis/<group>/<version>/...` if `served` is true.
+          name is the version name, e.g. “v1”, “v2beta1”, etc. The custom
+          resources are served under this version at `/apis/<group>/<version>/...` if
+          `served` is true.
         type: string
       schema:
         description: >-
@@ -2845,8 +2834,6 @@ data_types:
           foreground.
         type: string
         required: false
-        constraints:
-          - valid_values: [ Orphan, Background, Foreground ]
 
   DeploymentCondition:
     metadata:
@@ -2931,7 +2918,6 @@ data_types:
           will be the ones affected by this deployment. It must match the pod template's
           labels.
         type: LabelSelector
-        required: false
       strategy:
         description: >-
           The deployment strategy to use to replace existing pods with new ones.
@@ -3152,8 +3138,6 @@ data_types:
           https://kubernetes.io/docs/concepts/storage/volumes#emptydir
         type: string
         required: false
-        constraints:
-          - valid_values: [ '', Memory ]
       sizeLimit:
         description: >-
           sizeLimit is the total amount of local storage required for this EmptyDir
@@ -3338,8 +3322,6 @@ data_types:
           The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.
         type: string
         required: false
-        constraints:
-          - valid_values: [ UDP, TCP, SCTP ]
 
   EndpointSubset:
     metadata:
@@ -4404,8 +4386,6 @@ data_types:
           window is 300 seconds long).
         type: integer
         required: false
-        constraints:
-          - in_range: [ 0, 3600 ]
 
   HTTPGetAction:
     metadata:
@@ -5401,8 +5381,6 @@ data_types:
           Defaults to atomic for arrays.
         type: string
         required: false
-        constraints:
-          - valid_values: [ atomic, set, map ]
       x-kubernetes-map-type:
         description: >-
           x-kubernetes-map-type annotates an object to further describe its topology. This
@@ -5416,8 +5394,6 @@ data_types:
            Atomic maps will be entirely replaced when updated.
         type: string
         required: false
-        constraints:
-          - valid_values: [ granular, atomic ]
       x-kubernetes-preserve-unknown-fields:
         description: >-
           x-kubernetes-preserve-unknown-fields stops the API server decoding step from
@@ -5802,8 +5778,6 @@ data_types:
           operator represents a key's relationship to a set of values. Valid operators are
           In, NotIn, Exists and DoesNotExist.
         type: string
-        constraints:
-          - valid_values: [ In, NotIn, Exists, DoesNotExist ]
       values:
         description: >-
           values is an array of string values. If the operator is In or NotIn, the values
@@ -6199,8 +6173,6 @@ data_types:
           created. The only valid values for this field are 'Apply' and 'Update'.
         type: string
         required: false
-        constraints:
-          - valid_values: [ Apply, Update ]
       subresource:
         description: >-
           Subresource is the name of the subresource used to update that object, or empty
@@ -6436,8 +6408,6 @@ data_types:
           handled - allowed values are Ignore or Fail. Defaults to Fail.
         type: string
         required: false
-        constraints:
-          - valid_values: [ Ignore, Fail ]
       matchPolicy:
         description: >-
           matchPolicy defines how the "rules" list is used to match incoming requests.
@@ -6459,8 +6429,6 @@ data_types:
           Defaults to "Equivalent"
         type: string
         required: false
-        constraints:
-          - valid_values: [ Exact, Equivalent ]
       name:
         description: >-
           The name of the admission webhook. Name should be fully qualified, e.g.,
@@ -6546,8 +6514,6 @@ data_types:
           Defaults to "Never".
         type: string
         required: false
-        constraints:
-          - valid_values: [ Never, IfNeeded ]
       rules:
         description: >-
           Rules describes what operations on what resources/subresources the webhook cares
@@ -6570,8 +6536,6 @@ data_types:
           will be auto-rejected if they match a webhook with sideEffects == Unknown or
           Some.
         type: string
-        constraints:
-          - valid_values: [ None, NoneOnDryRun ]
       timeoutSeconds:
         description: >-
           TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
@@ -6580,8 +6544,6 @@ data_types:
           seconds.
         type: integer
         required: false
-        constraints:
-          - in_range: [ 1, 30 ]
 
   NFSVolumeSource:
     metadata:
@@ -7081,8 +7043,6 @@ data_types:
           Represents a key's relationship to a set of values. Valid operators are In,
           NotIn, Exists, DoesNotExist. Gt, and Lt.
         type: string
-        constraints:
-          - valid_values: [ In, NotIn, Exists, DoesNotExist, Gt, Lt ]
       values:
         description: >-
           An array of string values. If the operator is In or NotIn, the values array must
@@ -8422,8 +8382,6 @@ data_types:
           Note that this field cannot be set when spec.os.name is windows.
         type: string
         required: false
-        constraints:
-          - valid_values: [ OnRootMismatch, Always ]
       runAsGroup:
         description: >-
           The GID to run the entrypoint of the container process. Uses runtime default if
@@ -8717,8 +8675,6 @@ data_types:
           explicitly to 'ClusterFirstWithHostNet'.
         type: string
         required: false
-        constraints:
-          - valid_values: [ ClusterFirstWithHostNet, ClusterFirst, Default, None ]
       enableServiceLinks:
         description: >-
           EnableServiceLinks indicates whether information about services should be
@@ -9071,8 +9027,6 @@ data_types:
           https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase
         type: string
         required: false
-        constraints:
-          - valid_values: [ Pending, Running, Succeeded, Unknown ]
       podIP:
         description: >-
           IP address allocated to the pod. Routable at least within the cluster. Empty if
@@ -9122,11 +9076,13 @@ data_types:
           More info:
           https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors"
         type: LabelSelector
+        required: false
       template:
         description: >-
           More info:
           https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
         type: PodTemplateSpec
+        required: false
 
   PodTemplateSpec:
     metadata:
@@ -9287,8 +9243,6 @@ data_types:
           Protocol is the protocol of the service port of which status is recorded here
           The supported values are: "TCP", "UDP", "SCTP"
         type: string
-        constraints:
-          - valid_values: [ TCP, UDP, SCTP ]
 
   PortworxVolumeSource:
     metadata:
@@ -9491,8 +9445,6 @@ data_types:
           is 1.
         type: integer
         required: false
-        constraints:
-          - greater_than: 0
       tcpSocket:
         description: >-
           TCPSocket specifies an action involving a TCP port.
@@ -10506,8 +10458,6 @@ data_types:
         type: list
         entry_schema: string
         required: false
-        constraints:
-          - min_length: 1
       resources:
         description: >-
           Resources is a list of resources this rule applies to.
@@ -10534,8 +10484,6 @@ data_types:
           Default is "*".
         type: string
         required: false
-        constraints:
-          - valid_values: [ Cluster, Namespaced, '*' ]
 
   RunAsGroupStrategyOptions:
     metadata:
@@ -10863,8 +10811,6 @@ data_types:
           Represents a scope's relationship to a set of values. Valid operators are In,
           NotIn, Exists, DoesNotExist.
         type: string
-        constraints:
-          - valid_values: [ In, NotIn, Exists, DoesNotExist ]
       scopeName:
         description: >-
           The name of the scope that the selector applies to.
@@ -11426,8 +11372,6 @@ data_types:
           load-spreading.
         type: string
         required: false
-        constraints:
-          - valid_values: [ Local, Cluster ]
       healthCheckNodePort:
         description: >-
           healthCheckNodePort specifies the healthcheck nodePort for the service. This
@@ -11449,8 +11393,6 @@ data_types:
           is "Cluster".
         type: string
         required: false
-        constraints:
-          - valid_values: [ Local, Cluster ]
       ipFamilies:
         description: >-
           IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service.
@@ -11483,8 +11425,6 @@ data_types:
           a service to type ExternalName.
         type: string
         required: false
-        constraints:
-          - valid_values: [ SingleStack, PreferDualStack, RequireDualStack ]
       ports:
         description: >-
           The list of ports that are exposed by this service. More info:
@@ -11523,8 +11463,6 @@ data_types:
           https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
         type: string
         required: false
-        constraints:
-          - valid_values: [ ClientIP, None ]
       sessionAffinityConfig:
         description: >-
           sessionAffinityConfig contains the configurations of session affinity.
@@ -11547,8 +11485,6 @@ data_types:
           https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
         type: string
         required: false
-        constraints:
-          - valid_values: [ ExternalName, ClusterIP, NodePort, LoadBalancer ]
 
   ServiceStatus:
     metadata:
@@ -12444,8 +12380,6 @@ data_types:
           When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
         type: string
         required: false
-        constraints:
-          - valid_values: [ NoSchedule, PreferNoSchedule, NoExecute ]
       key:
         description: >-
           Key is the taint key that the toleration applies to. Empty means match all taint
@@ -12460,8 +12394,6 @@ data_types:
           so that a pod can tolerate all taints of a particular category.
         type: string
         required: false
-        constraints:
-          - valid_values: [ Exists, Equal ]
       tolerationSeconds:
         description: >-
           TolerationSeconds represents the period of time the toleration (which must be of
@@ -12716,8 +12648,6 @@ data_types:
           handled - allowed values are Ignore or Fail. Defaults to Fail.
         type: string
         required: false
-        constraints:
-          - valid_values: [ Ignore, Fail ]
       matchPolicy:
         description: >-
           matchPolicy defines how the "rules" list is used to match incoming requests.
@@ -12739,8 +12669,6 @@ data_types:
           Defaults to "Equivalent"
         type: string
         required: false
-        constraints:
-          - valid_values: [ Exact, Equivalent ]
       name:
         description: >-
           The name of the admission webhook. Name should be fully qualified, e.g.,
@@ -12825,8 +12753,6 @@ data_types:
           will be auto-rejected if they match a webhook with sideEffects == Unknown or
           Some.
         type: string
-        constraints:
-          - valid_values: [ None, NoneOnDryRun ]
       timeoutSeconds:
         description: >-
           TimeoutSeconds specifies the timeout for this webhook. After the timeout passes,
@@ -12835,8 +12761,6 @@ data_types:
           seconds.
         type: integer
         required: false
-        constraints:
-          - in_range: [ 1, 30 ]
 
   ValidationRule:
     metadata:
